@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EnchantedShop | Toko Bunga</title>
+    <title>EnchantedShop | Toko Bunga Online</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome CDN for Icons -->
@@ -50,6 +50,7 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
+        <!-- All HTML sections remain the same -->
         <!-- 1. HOME -->
         <section id="home" class="content-section active-section">
             <div class="bg-pink-50 p-8 md:p-12 rounded-xl shadow-lg flex flex-col md:flex-row items-center justify-between">
@@ -64,7 +65,7 @@
                     </button>
                 </div>
                 <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center">
-                    <img src="https://via.placeholder.com/350x350/F472B6/FFFFFF?text=Bunga+Segar" alt="Bunga Promo" class="rounded-full shadow-2xl object-cover w-64 h-64 md:w-80 md:h-80">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_T4BatTKDvX9SRgnNNF0PMnEY2zFad_TA7Q&s" alt="Bunga Promo" class="rounded-full shadow-2xl object-cover w-64 h-64 md:w-80 md:h-80">
                 </div>
             </div>
         </section>
@@ -72,20 +73,15 @@
         <!-- 2. KATALOG PRODUK -->
         <section id="products" class="content-section">
             <h2 class="text-4xl font-bold text-gray-800 mb-8 border-b-2 border-pink-600 pb-2"><i class="fas fa-th-list pink-icon mr-2"></i> Katalog Bunga Pilihan</h2>
-            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Products rendered by JS -->
-            </div>
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
         </section>
 
         <!-- 3. KERANJANG BELANJA -->
         <section id="cart" class="content-section">
             <h2 class="text-4xl font-bold text-gray-800 mb-8 border-b-2 border-pink-600 pb-2"><i class="fas fa-shopping-basket pink-icon mr-2"></i> Keranjang Belanja Anda</h2>
-            
-            <div id="cart-items-container" class="bg-white p-4 md:p-6 rounded-lg shadow-md overflow-x-auto">
-                <p id="empty-cart-message" class="text-gray-500 text-center py-10 hidden">Keranjang Anda masih kosong.</p>
-            </div>
-
-            <div id="cart-summary" class="mt-6 flex justify-end">
+            <div id="cart-items-container" class="bg-white p-4 md:p-6 rounded-lg shadow-md overflow-x-auto"></div>
+            <!-- Total summary is now controlled by JS -->
+            <div id="cart-summary" class="mt-6 flex justify-end hidden">
                 <div class="w-full md:w-1/3 p-6 bg-pink-50 rounded-lg shadow-inner">
                     <div class="flex justify-between font-semibold text-lg text-gray-700 mb-4">
                         <span>Total Belanja:</span>
@@ -101,10 +97,7 @@
         <!-- 4. CHECKOUT -->
         <section id="checkout" class="content-section">
             <h2 class="text-4xl font-bold text-gray-800 mb-8 border-b-2 border-pink-600 pb-2"><i class="fas fa-credit-card pink-icon mr-2"></i> Konfirmasi Pesanan</h2>
-            
             <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg grid grid-cols-1 lg:grid-cols-3 gap-8">
-                
-                <!-- Data Penerima -->
                 <div class="lg:col-span-2">
                     <h3 class="text-2xl font-semibold mb-4 text-pink-600">Data Pengiriman</h3>
                     <form id="checkout-form" class="space-y-4">
@@ -119,34 +112,24 @@
                         <div>
                             <label for="hp" class="block text-sm font-medium text-gray-700">Nomor HP Pengirim (WhatsApp)</label>
                             <input type="tel" id="hp" class="mt-1 block w-full border border-gray-300 rounded-md p-3" pattern="[0-9]*" required>
-                            <p class="text-xs text-gray-500 mt-1">Hanya angka diperbolehkan. Contoh: 081234567890</p>
+                            <p class="text-xs text-gray-500 mt-1">Hanya angka diperbolehkan.</p>
                         </div>
                     </form>
                 </div>
-
-                <!-- Ringkasan & Pembayaran -->
                 <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
                     <h3 class="text-2xl font-semibold mb-4 text-gray-800">Ringkasan Pesanan</h3>
                     <div id="checkout-summary-list" class="space-y-2 mb-6 border-b pb-4"></div>
-
                     <div class="flex justify-between font-bold text-xl text-gray-800 mb-6">
                         <span>Total Akhir:</span>
                         <span id="final-total" class="text-pink-600">Rp 0</span>
                     </div>
-
                     <h3 class="text-lg font-semibold mb-3">Metode Pembayaran</h3>
                     <div class="p-3 bg-white rounded-md border border-pink-300">
-                        <label class="flex items-center font-medium">
-                            <i class="fas fa-university pink-icon mr-3"></i>
-                            <span>Transfer Bank (BCA/Mandiri)</span>
-                        </label>
+                        <label class="flex items-center font-medium"><i class="fas fa-university pink-icon mr-3"></i><span>Transfer Bank</span></label>
                     </div>
-                    <p class="text-sm text-gray-500 mt-2">Detail rekening akan diberikan setelah konfirmasi WhatsApp.</p>
-
-                    <button class="w-full mt-6 py-4 bg-green-500 text-white font-bold text-lg rounded-lg hover:bg-green-600" onclick="sendOrderViaWhatsapp()">
-                        <i class="fab fa-whatsapp mr-2"></i> Pesan Sekarang via WhatsApp
+                    <button class="w-full mt-6 py-4 bg-green-500 text-white font-bold text-lg rounded-lg" onclick="sendOrderViaWhatsapp()">
+                        <i class="fab fa-whatsapp mr-2"></i> Pesan via WhatsApp
                     </button>
-                    <p class="text-xs text-red-500 mt-2 text-center">Pastikan data pengiriman sudah benar sebelum klik.</p>
                 </div>
             </div>
         </section>
@@ -161,8 +144,7 @@
         <section id="contact" class="content-section">
             <div class="bg-white p-8 rounded-lg shadow-lg">
                 <h2 class="text-4xl font-bold text-gray-800 mb-6"><i class="fas fa-headset pink-icon mr-2"></i> Hubungi Kami</h2>
-                <p class="text-lg text-gray-600 mb-8">Butuh pesanan custom atau ada pertanyaan? Hubungi admin kami.</p>
-                <a href="https://wa.me/6281234567890?text=Halo%20EnchantedShop,%20saya%20ingin%20membuat%20pesanan%20custom" target="_blank" class="flex items-center justify-center p-4 bg-green-500 text-white text-xl font-semibold rounded-lg hover:bg-green-600 shadow-md">
+                <a href="https://wa.me/6281234567890?text=Halo%20EnchantedShop" target="_blank" class="flex items-center justify-center p-4 bg-green-500 text-white text-xl font-semibold rounded-lg hover:bg-green-600 shadow-md">
                     <i class="fab fa-whatsapp mr-3"></i> Chat Admin via WhatsApp
                 </a>
             </div>
@@ -177,9 +159,9 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- JAVASCRIPT LOGIC (PERSISTENT VERSION) -->
     <script>
-        const ADMIN_WA_NUMBER = '6281234567890'; // Ganti dengan nomor Admin
+        const ADMIN_WA_NUMBER = '6281234567890';
         const products = [
             { id: 1, name: "Buket Mawar Merah Klasik", price: 350000, description: "Simbol cinta abadi.", image: 'Mawar' },
             { id: 2, name: "Papan Bunga Ucapan Selamat", price: 850000, description: "Papan besar untuk pernikahan.", image: 'Papan' },
@@ -189,15 +171,11 @@
         ];
 
         let cart = [];
-        let orders = []; // Orders are session-based for now
-
-        // --- Core Application Logic ---
+        let orders = [];
 
         function showSection(id) {
-            console.log(`Navigating to section: ${id}`);
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active-section');
-            });
+            console.log(`ACTION: Navigating to section '${id}'`);
+            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active-section'));
             document.getElementById(id).classList.add('active-section');
 
             if (id === 'cart') renderCart();
@@ -205,34 +183,53 @@
             if (id === 'orders') renderOrders();
         }
         
-        // --- Local Storage & State Management (BUG FIX) ---
-
-        function saveCartToStorage() {
-            localStorage.setItem('enchantedShopCart', JSON.stringify(cart));
-            console.log('Cart saved to localStorage:', cart);
+        // --- Persistent State Management with localStorage ---
+        function saveToStorage(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+            console.log(`OK: Data saved to localStorage with key '${key}'.`);
         }
 
-        function loadCartFromStorage() {
-            const savedCart = localStorage.getItem('enchantedShopCart');
-            if (savedCart) {
-                cart = JSON.parse(savedCart);
-                console.log('Cart loaded from localStorage:', cart);
+        function loadFromStorage(key) {
+            const data = localStorage.getItem(key);
+            if (data) {
+                console.log(`OK: Data loaded from localStorage with key '${key}'.`);
+                return JSON.parse(data);
+            }
+            return []; // Return empty array if nothing is found
+        }
+
+        function updateQuantity(productId, delta) {
+            console.log(`ACTION: updateQuantity called for product ${productId} with delta ${delta}`);
+            try {
+                let item = cart.find(item => item.id === productId);
+                if (item) {
+                    item.quantity += delta;
+                    if (item.quantity <= 0) cart = cart.filter(i => i.id !== productId);
+                } else if (delta > 0) {
+                    const product = products.find(p => p.id === productId);
+                    cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1 });
+                }
+                
+                saveToStorage('enchantedShopCart', cart);
+                updateCartCount();
+                renderProducts();
+                if (document.getElementById('cart').classList.contains('active-section')) renderCart();
+            } catch (error) {
+                console.error(`EXCEPTION in updateQuantity:`, error);
             }
         }
 
-        function updateCartAndUI() {
-            saveCartToStorage();
-            updateCartCount();
-            renderProducts();
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+            document.getElementById('checkout-button').disabled = cart.length === 0;
             
-            // If user is on cart page, refresh it
-            if(document.getElementById('cart').classList.contains('active-section')) {
-                renderCart();
-            }
+            // UI FIX: Hide cart summary if cart is empty
+            const cartSummaryEl = document.getElementById('cart-summary');
+            cartSummaryEl.classList.toggle('hidden', cart.length === 0);
         }
 
-        // --- Product & Cart Rendering ---
-
+        // --- UI Rendering Functions ---
         function renderProducts() {
             const container = document.getElementById('product-list');
             container.innerHTML = products.map(product => {
@@ -241,69 +238,27 @@
                 
                 let buttonHtml;
                 if (qty > 0) {
-                    buttonHtml = `
-                        <div class="flex justify-between items-center bg-pink-100 rounded-lg p-1">
-                            <button class="p-1 text-pink-600 hover:text-pink-800 transition" onclick="updateQuantity(${product.id}, -1)">
-                                <i class="fas fa-minus-circle fa-lg"></i>
-                            </button>
-                            <span class="font-bold text-lg text-pink-700">${qty}</span>
-                            <button class="p-1 text-pink-600 hover:text-pink-800 transition" onclick="updateQuantity(${product.id}, 1)">
-                                <i class="fas fa-plus-circle fa-lg"></i>
-                            </button>
-                        </div>
-                    `;
+                    buttonHtml = `<div class="flex justify-between items-center bg-pink-100 rounded-lg p-1">
+                        <button class="p-1 text-pink-600" onclick="updateQuantity(${product.id}, -1)"><i class="fas fa-minus-circle fa-lg"></i></button>
+                        <span class="font-bold text-lg text-pink-700">${qty}</span>
+                        <button class="p-1 text-pink-600" onclick="updateQuantity(${product.id}, 1)"><i class="fas fa-plus-circle fa-lg"></i></button>
+                    </div>`;
                 } else {
-                    buttonHtml = `
-                        <button class="w-full py-2 bg-pink-600 text-white font-medium rounded-lg hover:bg-pink-700" onclick="updateQuantity(${product.id}, 1)">
-                            <i class="fas fa-plus mr-2"></i> Tambah
-                        </button>
-                    `;
+                    buttonHtml = `<button class="w-full py-2 bg-pink-600 text-white font-medium rounded-lg" onclick="updateQuantity(${product.id}, 1)"><i class="fas fa-plus mr-2"></i> Tambah</button>`;
                 }
 
-                return `
-                    <div class="product-card bg-white rounded-lg overflow-hidden shadow-lg border border-gray-100 p-4 flex flex-col justify-between">
-                        <div>
-                            <div class="h-48 bg-pink-100 mb-4 flex items-center justify-center text-pink-600 font-bold text-xl rounded-md">${product.image}</div>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3>
-                            <p class="text-sm text-gray-500 mb-3 line-clamp-2">${product.description}</p>
-                        </div>
-                        <div>
-                            <p class="text-2xl font-bold text-pink-600 mb-4">Rp ${product.price.toLocaleString('id-ID')}</p>
-                            ${buttonHtml}
-                        </div>
+                return `<div class="product-card bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-pink-100 mb-4 flex items-center justify-center text-pink-600 font-bold text-xl rounded-md">${product.image}</div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3>
+                        <p class="text-sm text-gray-500 mb-3">${product.description}</p>
                     </div>
-                `;
+                    <div>
+                        <p class="text-2xl font-bold text-pink-600 mb-4">Rp ${product.price.toLocaleString('id-ID')}</p>
+                        ${buttonHtml}
+                    </div>
+                </div>`;
             }).join('');
-        }
-        
-        function updateQuantity(productId, delta) {
-            console.log(`updateQuantity: Fired for product ${productId} with delta ${delta}`);
-            try {
-                const product = products.find(p => p.id === productId);
-                let item = cart.find(item => item.id === productId);
-
-                if (item) {
-                    item.quantity += delta;
-                    if (item.quantity <= 0) {
-                        cart = cart.filter(i => i.id !== productId);
-                    }
-                } else if (delta > 0) {
-                    cart.push({ id: product.id, name: product.name, price: product.price, quantity: delta });
-                }
-                updateCartAndUI();
-            } catch (error) {
-                console.error('Exception in updateQuantity:', error);
-            }
-        }
-
-        function updateCartCount() {
-            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cart-count').textContent = count;
-            document.getElementById('checkout-button').disabled = cart.length === 0;
-            const emptyCartMsg = document.getElementById('empty-cart-message');
-            if (emptyCartMsg) {
-                emptyCartMsg.classList.toggle('hidden', cart.length > 0);
-            }
         }
         
         function renderCart() {
@@ -311,7 +266,7 @@
             const total = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
             
             if (cart.length === 0) {
-                container.innerHTML = ''; // Clear table
+                container.innerHTML = '<p class="text-gray-500 text-center py-10">Keranjang Anda masih kosong.</p>';
                 document.getElementById('cart-total').textContent = 'Rp 0';
                 return;
             }
@@ -326,13 +281,13 @@
             
             cart.forEach(item => {
                 tableHtml += `<tr>
-                    <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.name}</td>
-                    <td class="px-3 py-4 whitespace-nowrap text-sm text-center">
+                    <td class="px-3 py-4 text-sm font-medium text-gray-900">${item.name}</td>
+                    <td class="px-3 py-4 text-sm text-center">
                         <button class="text-red-500 font-bold px-1" onclick="updateQuantity(${item.id}, -1)"><i class="fas fa-minus-circle"></i></button>
                         <span class="mx-1">${item.quantity}</span>
                         <button class="text-green-500 font-bold px-1" onclick="updateQuantity(${item.id}, 1)"><i class="fas fa-plus-circle"></i></button>
                     </td>
-                    <td class="px-3 py-4 whitespace-nowrap text-sm font-semibold text-right">Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</td>
+                    <td class="px-3 py-4 text-sm font-semibold text-right">Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</td>
                 </tr>`;
             });
             tableHtml += '</tbody></table>';
@@ -340,14 +295,12 @@
             document.getElementById('cart-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
         }
         
-        // --- Checkout & Order Logic ---
-
         function renderCheckoutSummary() {
             const summaryList = document.getElementById('checkout-summary-list');
             const total = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 
             if (cart.length === 0) {
-                showSection('products'); // Redirect if cart is empty
+                showSection('products');
                 return;
             }
             summaryList.innerHTML = cart.map(item => `<div class="flex justify-between text-sm text-gray-600">
@@ -357,61 +310,14 @@
             document.getElementById('final-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
         }
 
-        function sendOrderViaWhatsapp() {
-            console.log('sendOrderViaWhatsapp: Button clicked.');
-            try {
-                const form = document.getElementById('checkout-form');
-                if (!form.checkValidity()) {
-                    console.warn('Form validation failed.');
-                    alert('Mohon lengkapi semua data pengiriman dengan benar.');
-                    form.reportValidity();
-                    return;
-                }
-
-                const name = document.getElementById('penerima').value.trim();
-                const address = document.getElementById('alamat').value.trim();
-                const phone = document.getElementById('hp').value.trim();
-                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-                let itemList = cart.map(item => `- ${item.name} (x${item.quantity})`).join('\n');
-                const message = `*PESANAN BARU ENCHANTEDSHOP*\n----------------------------------------\n*Data Pengiriman:*\nNama Penerima: ${name}\nAlamat: ${address}\nNo. HP Pengirim: ${phone}\n\n*Detail Pesanan:*\n${itemList}\n\n*Total Pembayaran:*\nRp ${total.toLocaleString('id-ID')}\n\n*Metode Bayar:*\nTransfer Bank\n\nMohon konfirmasi pesanan ini dan berikan detail rekening. Terima kasih.`.trim();
-                
-                const encodedMessage = encodeURIComponent(message);
-                const waLink = `https://wa.me/${ADMIN_WA_NUMBER}?text=${encodedMessage}`;
-                console.log('Generated WA link:', waLink);
-
-                finalizeOrder(name, total);
-                window.open(waLink, '_blank');
-            } catch (error) {
-                console.error('Exception in sendOrderViaWhatsapp:', error);
-                alert('Terjadi kesalahan saat membuat pesanan. Silakan coba lagi.');
-            }
-        }
-
-        function finalizeOrder(name, total) {
-            orderCounter++;
-            orders.push({
-                id: orderCounter,
-                penerima: name,
-                total: total,
-                items: [...cart], // copy of cart
-                status: 'Menunggu Konfirmasi WA',
-                date: new Date().toLocaleDateString('id-ID')
-            });
-            
-            cart = []; // Clear cart array
-            localStorage.removeItem('enchantedShopCart'); // Clear storage (BUG FIX)
-            console.log('Order finalized, cart and localStorage cleared.');
-
-            updateCartAndUI(); // Update all UI elements to reflect empty cart
-        }
-
         function renderOrders() {
             const container = document.getElementById('order-list-container');
             if (orders.length === 0) {
-                container.innerHTML = '<p class="text-center text-gray-500 py-10">Belum ada riwayat pesanan sesi ini.</p>';
+                container.innerHTML = '<p class="text-center text-gray-500 py-10">Belum ada riwayat pesanan.</p>';
                 return;
             }
+            // Sort orders from newest to oldest
+            orders.sort((a, b) => b.id - a.id);
             container.innerHTML = orders.map(order => `<div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-yellow-500">
                 <div class="flex justify-between items-start mb-3 flex-wrap">
                     <h4 class="text-xl font-bold text-gray-800">Pesanan #${order.id}</h4>
@@ -422,11 +328,56 @@
             </div>`).join('');
         }
 
+        // --- Checkout & Order Finalization ---
+        function sendOrderViaWhatsapp() {
+            console.log('ACTION: sendOrderViaWhatsapp clicked.');
+            try {
+                const form = document.getElementById('checkout-form');
+                if (!form.checkValidity()) {
+                    console.warn('VALIDATION: Form is invalid.');
+                    alert('Mohon lengkapi semua data pengiriman dengan benar.');
+                    form.reportValidity();
+                    return;
+                }
+
+                const name = document.getElementById('penerima').value.trim();
+                const address = document.getElementById('alamat').value.trim();
+                const phone = document.getElementById('hp').value.trim();
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const orderId = Date.now(); // Unique ID based on timestamp
+
+                let itemList = cart.map(item => `- ${item.name} (x${item.quantity})`).join('\n');
+                const message = `*PESANAN BARU: #${orderId}*\n----------------------------------------\n*Data Pengiriman:*\nNama Penerima: ${name}\nAlamat: ${address}\nNo. HP Pengirim: ${phone}\n\n*Detail Pesanan:*\n${itemList}\n\n*Total Pembayaran:*\nRp ${total.toLocaleString('id-ID')}\n\nMohon konfirmasi pesanan ini. Terima kasih.`.trim();
+                
+                const encodedMessage = encodeURIComponent(message);
+                const waLink = `https://wa.me/${ADMIN_WA_NUMBER}?text=${encodedMessage}`;
+                console.log('OK: Generated WA link:', waLink);
+
+                orders.push({ id: orderId, penerima: name, total: total, status: 'Menunggu Konfirmasi WA', date: new Date().toLocaleDateString('id-ID') });
+                saveToStorage('enchantedShopOrders', orders);
+
+                cart = [];
+                saveToStorage('enchantedShopCart', cart); // Save empty cart
+                
+                updateCartCount();
+                renderProducts();
+                showSection('orders');
+                
+                window.open(waLink, '_blank');
+
+            } catch (error) {
+                console.error(`EXCEPTION in sendOrderViaWhatsapp:`, error);
+                alert('Terjadi kesalahan saat memproses pesanan. Silakan coba lagi.');
+            }
+        }
+
         // --- App Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM fully loaded. Initializing application.');
-            loadCartFromStorage();
-            updateCartAndUI();
+            console.log('EVENT: DOMContentLoaded. Initializing application.');
+            cart = loadFromStorage('enchantedShopCart');
+            orders = loadFromStorage('enchantedShopOrders');
+            updateCartCount();
+            renderProducts();
             showSection('home');
         });
     </script>
