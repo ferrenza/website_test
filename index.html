@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>EnchantedShop - Toko Bunga Online</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin:0; padding:0;
+      background:#f9f9f9;
+    }
+    header {
+      background:#e91e63;
+      color:white;
+      padding:15px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    header h1 {margin:0;}
+    nav a {
+      color:white;
+      margin:0 10px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+    .banner {
+      background:#fce4ec;
+      padding:30px;
+      text-align:center;
+    }
+    .banner h2 {margin-bottom:20px;}
+    .btn {
+      display:inline-block;
+      background:#e91e63;
+      color:white;
+      padding:10px 20px;
+      border-radius:5px;
+      text-decoration:none;
+    }
+    #katalog {
+      padding:30px;
+      text-align:center;
+    }
+    #product-list {
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .product {
+      background:white;
+      border:1px solid #ddd;
+      border-radius:10px;
+      padding:15px;
+      width:200px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
+    .product img {
+      width:100%; border-radius:8px;
+    }
+    .product h3 {margin:10px 0;}
+    .product p {color:#e91e63; font-weight:bold;}
+    .product button {
+      background:#e91e63; color:white;
+      border:none; padding:8px 12px;
+      border-radius:5px; cursor:pointer;
+    }
+    #cart {
+      padding:30px;
+    }
+    #cart-list p {margin:5px 0;}
+    form {
+      padding:20px; max-width:400px; margin:auto;
+      background:white; border-radius:10px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
+    form input, form select {
+      width:100%; padding:10px; margin:8px 0;
+      border:1px solid #ccc; border-radius:5px;
+    }
+    form button {
+      background:#e91e63; color:white;
+      border:none; padding:10px;
+      border-radius:5px; cursor:pointer; width:100%;
+    }
+    footer {
+      margin-top:30px;
+      padding:15px;
+      text-align:center;
+      background:#e91e63;
+      color:white;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>EnchantedShop</h1>
+    <nav>
+      <a href="#katalog">Katalog</a>
+      <a href="#cart">Keranjang</a>
+      <a href="#checkout">Checkout</a>
+      <a href="#contact">Kontak</a>
+    </nav>
+  </header>
+
+  <section class="banner">
+    <h2>🌸 Diskon 10% untuk bunga wisuda 🌸</h2>
+    <a href="#katalog" class="btn">Lihat Katalog</a>
+  </section>
+
+  <section id="katalog">
+    <h2>Katalog Bunga</h2>
+    <div id="product-list"></div>
+  </section>
+
+  <section id="cart">
+    <h2>Keranjang Belanja</h2>
+    <div id="cart-list"></div>
+    <button class="btn" onclick="gotoCheckout()">Lanjut ke Checkout</button>
+  </section>
+
+  <section id="checkout">
+    <h2 style="text-align:center;">Checkout</h2>
+    <form onsubmit="sendWA(event)">
+      <input type="text" id="nama" placeholder="Nama Penerima" required>
+      <input type="text" id="alamat" placeholder="Alamat Penerima" required>
+      <input type="text" id="hp" placeholder="Nomor HP" required>
+      <select id="bayar">
+        <option value="COD">COD</option>
+        <option value="Transfer Bank">Transfer Bank</option>
+        <option value="E-Wallet">E-Wallet</option>
+      </select>
+      <button type="submit">Pesan Sekarang</button>
+    </form>
+  </section>
+
+  <section id="contact" style="text-align:center; padding:30px;">
+    <h2>Kontak Kami</h2>
+    <p>Hubungi admin untuk custom order:</p>
+    <a class="btn" href="https://wa.me/6281234567890" target="_blank">Chat WhatsApp</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EnchantedShop. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const products = [
+      {id:1, name:"Buket Mawar Merah", price:250000, img:"https://via.placeholder.com/200x150?text=Mawar"},
+      {id:2, name:"Buket Wisuda", price:200000, img:"https://via.placeholder.com/200x150?text=Wisuda"},
+      {id:3, name:"Hampers Ulang Tahun", price:300000, img:"https://via.placeholder.com/200x150?text=Hampers"}
+    ];
+
+    const list = document.getElementById("product-list");
+    const cartList = document.getElementById("cart-list");
+
+    function renderProducts(){
+      list.innerHTML = "";
+      products.forEach(p => {
+        let card = document.createElement("div");
+        card.className = "product";
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <p>Rp ${p.price.toLocaleString()}</p>
+          <button onclick="addToCart(${p.id})">Tambah ke Keranjang</button>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function addToCart(id){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let product = products.find(p => p.id === id);
+      cart.push(product);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+      alert(product.name + " ditambahkan ke keranjang!");
+    }
+
+    function renderCart(){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if(cart.length === 0){
+        cartList.innerHTML = "<p>Keranjang kosong.</p>";
+        return;
+      }
+      let html = "";
+      cart.forEach((p,i) => {
+        html += `<p>${p.name} - Rp ${p.price.toLocaleString()} <button onclick="removeFromCart(${i})">❌</button></p>`;
+      });
+      let total = cart.reduce((a,b)=>a+b.price,0);
+      html += `<h3>Total: Rp ${total.toLocaleString()}</h3>`;
+      cartList.innerHTML = html;
+    }
+
+    function removeFromCart(index){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index,1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function gotoCheckout(){
+      document.querySelector("#checkout").scrollIntoView({behavior:"smooth"});
+    }
+
+    function sendWA(e){
+      e.preventDefault();
+      let nama = document.getElementById("nama").value;
+      let alamat = document.getElementById("alamat").value;
+      let hp = document.getElementById("hp").value;
+      let bayar = document.getElementById("bayar").value;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let detail = cart.map(p => `${p.name} - Rp ${p.price}`).join(", ");
+      let total = cart.reduce((a,b)=>a+b.price,0);
+
+      let pesan = `Halo Admin, saya pesan bunga:%0A${detail}%0ATotal: Rp ${total}%0ANama: ${nama}%0AAlamat: ${alamat}%0AHP: ${hp}%0APembayaran: ${bayar}`;
+      window.open(`https://wa.me/6281234567890?text=${pesan}`, "_blank");
+    }
+
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
